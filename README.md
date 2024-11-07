@@ -18,3 +18,17 @@
     <p>Apollo is a popular platform for building, managing, and optimizing GraohQL.</p>
   </li>
 </ul>
+
+<h2>Process</h2>
+<ul>
+  <li>
+    Task One
+    1. Make sure you have express, expresss-graphql, and graphql installed:
+    npm install express express-graphql graphql
+    2. Modify app.js
+    Update app.js to use schema you will define in schema.js:
+    3. Create schema.js:
+    Add GraphQLObjectType object using the object destructuring syntax. The create a new GrapgQLObject Type: TaskType which contains 2 parameters: (Name: Task, Fields property: Object contains a set of properties. (Id of type GraphQL string, title of type GraphQL string, weight of type GraphQLLint, and description of type GraphQLString.)
+
+  </li>
+</ul>

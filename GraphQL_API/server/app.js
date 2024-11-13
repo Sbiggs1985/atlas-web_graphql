@@ -5,7 +5,7 @@ const schema = require('./schema/schema');
 
 const app = express();
 
-const mongoURI = 'mongodb+srv://biggsstephaine:HGeAzZYDKl0cpRno@cluster0.fxpgp.mongodb.net/GraphQL_API';
+const mongoURI = 'mongodb+srv://test:test@task6.wdpsj.mongodb.net/?retryWrites=true&w=majority&appName=task6';
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 

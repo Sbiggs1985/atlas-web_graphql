@@ -1,7 +1,7 @@
 const Task = require('../models/task');
 const Project = require('../models/project');
 const graphql = require('graphql');
-const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLList } = graphql;
+const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLList, GraphQLNonNull } = graphql;
 const _ = require('lodash');
 
 const tasks = [
@@ -29,6 +29,7 @@ const TaskType = new GraphQLObjectType({
     }
   }),
 });
+
 
 const ProjectType = new GraphQLObjectType({
   name: 'Project',
@@ -76,6 +77,46 @@ const RootQuery = new GraphQLObjectType({
       }
     }
   }
+});
+
+const Mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    addProject: {
+      type: ProjectType,
+      args: {
+        title: { type: new GraphQLNonNull(GraphQLString) },
+        weight: { type: new GraphQLNonNull(GraphQLInt) },
+        description: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parent, args) {
+        const project = new Project({
+          title: args.title,
+          weight: args.weight,
+          description: args.description,
+        });
+        return project.save();
+      },
+    },
+    addTask: {
+      type: TaskType,
+      args: {
+        title: { type: new GraphQLNonNull(GraphQLString) },
+        weight: { type: new GraphQLNonNull(GraphQLInt) },
+        description: { type: new GraphQLNonNull(GraphQLString) },
+        projectId: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        const task = new Task({
+          title: args.title,
+          weight: args.weight,
+          description: args.description,
+          projectId: args.projectId,
+        });
+        return task.save();
+      },
+    },
+  },
 });
 
 module.exports = new GraphQLSchema({
